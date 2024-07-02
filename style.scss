@@ -1,0 +1,31 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-size: 16px;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+h2{
+  color: rgb(0, 150, 78);
+  font-size: 24px;
+}
+
+.category-wrapper{
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+.input-wrapper{
+  max-width: 300px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+table{
+  table-layout: fixed;
+}
