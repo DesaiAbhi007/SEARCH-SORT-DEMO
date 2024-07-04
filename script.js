@@ -5,6 +5,7 @@ let categoryHeading = document.getElementsByClassName("categoryHeading");
 let typeHeading = document.getElementsByClassName("typeHeading");
 let statusHeading = document.getElementsByClassName("statusHeading");
 let stateHeading = document.getElementsByClassName("stateHeading");
+let tbody = document.getElementsByTagName("tbody");
 
 const userData = [
   {
@@ -112,36 +113,43 @@ let objectItems = {
   state: [],
 };
 
+let checkedData = [];
+
+function findValue(name, value, checked, data) {
+
+  Object.entries(objectItems).map(([key, value]) => {
+    console.log("====>", key, value);
+    if (value.length && checked) {
+      const aaa = userData.filter((item) => value.includes(item[key]));
+      tableDisplayData(aaa)
+      console.log("aaa", aaa);
+    }
+
+    // if(value.length === 0 && !checked){
+      // tbody.innerHTML = "";
+      // let tr = document.createElement("tr");
+      // let td = document.createElement("td");
+      // td.setAttribute("colspan", "7");
+      // td.innerHTML = "No data found"
+      // tbody[0].appendChild(tr);
+      // tr.appendChild(td) 
+      // tableDisplayData()
+    // }
+  });
+
+}
+
 function handleChange(e) {
-  if (e.target.name == "city") {
-    if (e.target.checked === true) {
-      objectItems.city.push(e.target.value);
-    } else {
-      objectItems.city.pop(e.target.value);
-    }
-  } else if (e.target.name == "category") {
-    if (e.target.checked === true) {
-      objectItems.category.push(e.target.value);
-    } else {
-      objectItems.category.pop(e.target.value);
-    }
-  } else if (e.target.name == "type") {
-    if (e.target.checked === true) {
-      objectItems.type.push(e.target.value);
-    } else {
-      objectItems.type.pop(e.target.value);
-    }
-  } else if (e.target.name == "active") {
-    if (e.target.checked === true) {
-      objectItems.active.push(e.target.value);
-    } else {
-      objectItems.active.pop(e.target.value);
-    }
-  } else if (e.target.name == "state") {
-    if (e.target.checked === true) {
-      objectItems.state.push(e.target.value);
-    } else {
-      objectItems.state.pop(e.target.value);
-    }
+  const { name, value, checked } = e.target;
+  console.log("---->", name, value, checked);
+
+  if (checked === true) {
+    objectItems[name].push(value);
+  } else {
+    const data = objectItems[name].filter((val) => val !== value);
+    objectItems[name] = data;
   }
+  console.log("objectItems", objectItems);
+
+  findValue(name, value, checked, objectItems);
 }
